@@ -1,3 +1,4 @@
+import './Card.css'
 import add_cart_icon from '../assets/images/icon-add-to-cart.svg'
 
 function Card({ img, name, category, price }) {
@@ -14,6 +15,7 @@ function Card({ img, name, category, price }) {
             <div className="info">
                 <span className='category'>{category}</span>
                 <p className='name'>{name}</p>
+                {/* <span>${price}</span> */}
                 <p className='price'>${price}</p>
             </div>
         </div>

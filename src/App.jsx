@@ -23,30 +23,32 @@ function App() {
   }, [])
 
   return (
-    <>
-      <main>
+    <main>
+      <section className='main_content'>
         <h1>Desserts</h1>
 
         <section className='content'>
           {data.map((card, index) => (
-            <Card 
+            <Card
               key={index}
-              img={card.image['thumbnail']}
+              img={card.image['desktop']}
               name={card.name}
               category={card.category}
               price={card.price}
             />
           ))}
         </section>
-      </main>
+      </section>
 
       <aside>
         <h2>Your Cart ({cartCount})</h2>
 
-        <img src={empty_cart_img} alt="Empty Cart" />
-        <p>Your added items will appear here</p>
+        <div className="content">
+          <img src={empty_cart_img} alt="Empty Cart" />
+          <p>Your added items will appear here</p>
+        </div>
       </aside>
-    </>
+    </main>
   )
 }
 
