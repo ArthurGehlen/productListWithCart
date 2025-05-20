@@ -8,10 +8,24 @@ import './App.css'
 
 function App() {
   const [data, setData] = useState([])
-  const [cartCount, setCartCount] = useState(0)
+  const [cart, setCart] = useState([
+    // { name: 'Teste', quantity: 0, default_cost: 0, total_cost: 0 },
+  ])
+
+  /*
+    // CART ESTRUCTURE
+    Cart: [
+      {
+        name: '',
+        quantity: 0,
+        default_cost: 0,
+        total_cost: 0
+      }
+    ]  
+  */
 
   function fetch_data() {
-    fetch('../data.json')
+    fetch('../src/api/data.json')
       .then(received_data => received_data.json())
       .then(received_data => (
         setData(received_data)
@@ -24,7 +38,7 @@ function App() {
 
   return (
     <main>
-      <section className='main_content'>
+      <section className='foods_content'>
         <h1>Desserts</h1>
 
         <section className='content'>
@@ -41,12 +55,29 @@ function App() {
       </section>
 
       <aside>
-        <h2>Your Cart ({cartCount})</h2>
+        <h2>Your Cart ({cart.length})</h2>
 
-        <div className="content">
-          <img src={empty_cart_img} alt="Empty Cart" />
-          <p>Your added items will appear here</p>
-        </div>
+        {cart.length == 0 ?
+          // Cart is empty
+          <div className="cart_content_empty">
+            <img src={empty_cart_img} alt="Empty Cart" />
+            <p>Your added items will appear here</p>
+          </div>
+
+          : 
+
+          // Cart has items 
+          <div className="cart_content">
+            {cart.map((product, index) => (
+              <div className="product" key={index}>
+                <p>{product.name}</p>
+                <p>{product.quantity}x</p>
+                <p>{product.default_cost}</p>
+                <p>{product.total_cost}</p>
+              </div>
+            ))}
+          </div>
+        }
       </aside>
     </main>
   )

@@ -11,24 +11,33 @@ body {
   min-height: 100vh;
   background-color: hsl(13, 31%, 94%);
   padding: 2rem 4rem;
+  display: flex;
+  justify-content: center;
 }
 
 main {
   display: flex;
+  flex-wrap: wrap;
   gap: 3rem;
 }
 
-.main_content {
+.foods_content {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.main_content .content {
-  display: grid;  
-  grid-template-rows: repeat(3, 15rem);
-  grid-template-columns: repeat(3, 15rem);
-  gap: 4rem;
+.foods_content h1 {
+  font-size: 2rem;
+  color: hsl(14, 65%, 9%);
+}
+
+.foods_content .content {
+  max-width: 53rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
 aside {
@@ -46,10 +55,16 @@ aside h2 {
   color: hsl(14, 86%, 42%);
 }
 
-aside .content {
+aside .cart_content_empty {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow-y: auto;
+}
+
+@media screen and (max-width: 476px) {
+  main {
+    align-items: center;
+  }
 }
