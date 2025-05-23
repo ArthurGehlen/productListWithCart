@@ -42,12 +42,11 @@ main {
 
 aside {
   width: 20rem;
-  height: 20rem;
-  padding: 1rem;
+  height: fit-content;
+  padding: 1.5rem;
   background-color: hsl(20, 50%, 98%);
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 2rem auto;
+  display: flex;
+  flex-direction: column;
   border-radius: 1rem;
 }
 
@@ -56,11 +55,74 @@ aside h2 {
 }
 
 aside .cart_content_empty {
+  height: 12.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow-y: auto;
+}
+
+aside .cart_content {
+  height: 100%;
+  margin-top: .6rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+aside .cart_content .product {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid hsl(13, 31%, 94%);
+  padding-bottom: 1rem;
+}
+
+aside .cart_content .product button {
+  width: 2rem;
+  height: fit-content;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+aside .cart_content .product button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid hsl(7, 20%, 60%);
+  border-radius: 50%;
+  padding: .2rem;
+}
+
+aside .cart_content .product button svg:hover {
+  fill: hsl(14, 65%, 9%);
+}
+
+aside .cart_content .product .info .specifies {
+  margin-top: .6rem;
+  display: flex;
+  gap: .8rem;
+}
+
+aside .cart_content .product .info .name {
+  font-size: .9rem;
+  color: hsl(14, 65%, 9%);
+  font-weight: 600;
+}
+
+aside .cart_content .product .info .specifies .quantity {
+  color: hsl(14, 86%, 42%);
+}
+
+aside .cart_content .product .info .specifies .default_cost {
+  color: hsl(14, 25%, 72%);
+}
+
+aside .cart_content .product .info .specifies .total_cost {
+  color: hsl(12, 20%, 44%);
 }
 
 @media screen and (max-width: 476px) {

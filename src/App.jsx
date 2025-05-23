@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react'
-import Card from './components/Card'
-import empty_cart_img from './assets/images/illustration-empty-cart.svg'
 import './App.css'
+import Card from './components/Card'
+import { useState, useEffect } from 'react'
+import empty_cart_img from './assets/images/illustration-empty-cart.svg'
+import remove_icon from './assets/images/icon-remove-item.svg'
+import carbon_neutral from './assets/images/icon-carbon-neutral.svg'
 
 function App() {
   const [data, setData] = useState([])
   const [cart, setCart] = useState([])
+  const [orderTotal, setOrderTotal] = useState(0)
 
   function fetch_data() {
     fetch('/data.json')
@@ -22,13 +25,13 @@ function App() {
       const existing = prevCart.find(item => item.name === product.name)
 
       if (existing) {
-        return prevCart.map(item => 
+        return prevCart.map(item =>
           item.name === product.name
-            ? { 
-                ...item, 
-                quantity: item.quantity + 1,
-                total_cost: (item.quantity + 1) * item.default_cost
-              }
+            ? {
+              ...item,
+              quantity: item.quantity + 1,
+              total_cost: (item.quantity + 1) * item.default_cost
+            }
             : item
         )
       } else {
@@ -42,39 +45,51 @@ function App() {
     })
   }
 
-  function increase_quantity(productName) {
+  function increase_quantity(product_name) {
     setCart(prevCart =>
       prevCart.map(item =>
-        item.name === productName
-          ? { 
-              ...item, 
-              quantity: item.quantity + 1,
-              total_cost: (item.quantity + 1) * item.default_cost 
-            }
+        item.name === product_name
+          ? {
+            ...item,
+            quantity: item.quantity + 1,
+            total_cost: (item.quantity + 1) * item.default_cost
+          }
           : item
       )
     )
   }
 
-  function decrease_quantity(productName) {
-    setCart(prevCart => 
+  function decrease_quantity(product_name) {
+    setCart(prevCart =>
       prevCart
-        .map(item => 
-          item.name === productName
-            ? { 
-                ...item, 
-                quantity: item.quantity - 1,
-                total_cost: (item.quantity - 1) * item.default_cost 
-              }
+        .map(item =>
+          item.name === product_name
+            ? {
+              ...item,
+              quantity: item.quantity - 1,
+              total_cost: (item.quantity - 1) * item.default_cost
+            }
             : item
         )
         .filter(item => item.quantity > 0)
     )
   }
 
-  function get_quantity(productName) {
-    const item = cart.find(p => p.name === productName)
+  function get_quantity(product_name) {
+    const item = cart.find(p => p.name === product_name)
     return item ? item.quantity : 0
+  }
+
+  function format_float_numbers(number) {
+    return number % 1 === 0 ? `${number}.00` : `${number}0`
+  }
+
+  function remove_product(product) {
+
+  }
+
+  function get_total_cost() {
+
   }
 
   return (
@@ -109,12 +124,38 @@ function App() {
           <div className="cart_content">
             {cart.map((product, index) => (
               <div className="product" key={index}>
-                <p>{product.name}</p>
-                <p>{product.quantity}x</p>
-                <p>${product.default_cost}</p>
-                <p>${product.total_cost}</p>
+                <div className="info">
+                  <p className='name'>{product.name}</p>
+
+                  <div className="specifies">
+                    <p className='quantity'>{product.quantity}x</p>
+                    <p className='default_cost'>
+                      <span>@</span>
+                      ${format_float_numbers(product.default_cost)}
+                    </p>
+                    <p className='total_cost'>${format_float_numbers(product.total_cost)}</p>
+                  </div>
+                </div>
+
+                <button>
+                  {/* <img src={remove_icon} alt="Remove" /> */}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path fill="#CAAFA7" d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/></svg>
+                </button>
               </div>
             ))}
+            <div className="order_total">
+              <span>Order Total</span>
+              <h1>${orderTotal}</h1>
+            </div>
+            <div className="carbon_neutral">
+              <img src={carbon_neutral} alt="Carbon Neutral" />
+              <p>
+                This is a <span>carbon-neutral</span> delivery
+              </p>
+            </div>
+            <button>
+              Confirm Order
+            </button>
           </div>
         )}
       </aside>
