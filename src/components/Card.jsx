@@ -1,4 +1,4 @@
-import add_cart_icon from '../assets/images/icon-add-to-cart.svg'
+import add_cart_icon from '/images/icon-add-to-cart.svg'
 import './Card.css'
 
 function Card({ img, name, category, price, quantity, add_to_cart, increase, decrease }) {

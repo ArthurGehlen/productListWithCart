@@ -1,9 +1,8 @@
-import './App.css'
-import Card from './components/Card'
 import { useState, useEffect } from 'react'
-import empty_cart_img from './assets/images/illustration-empty-cart.svg'
-import remove_icon from './assets/images/icon-remove-item.svg'
-import carbon_neutral from './assets/images/icon-carbon-neutral.svg'
+import Card from './components/Card'
+import './App.css'
+import empty_cart_img from '/images/illustration-empty-cart.svg'
+import carbon_neutral from '/images/icon-carbon-neutral.svg'
 
 function App() {
   const [data, setData] = useState([])
@@ -102,7 +101,7 @@ function App() {
               key={index}
               name={card.name}
               category={card.category}
-              img={card.image['desktop']}
+              img={card.image.desktop}
               price={card.price}
               quantity={get_quantity(card.name)}
               add_to_cart={() => add_item(card)}
@@ -138,7 +137,6 @@ function App() {
                 </div>
 
                 <button>
-                  {/* <img src={remove_icon} alt="Remove" /> */}
                   <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path fill="#CAAFA7" d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/></svg>
                 </button>
               </div>
